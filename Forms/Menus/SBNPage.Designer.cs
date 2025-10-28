@@ -34,6 +34,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(227, 253, 253);
             Name = "SBNPage";
             Size = new Size(1000, 500);
             ResumeLayout(false);
