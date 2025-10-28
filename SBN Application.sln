@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBN Application", "SBN Application.csproj", "{AFF69148-A6E9-432D-8BC1-F0CC45F3D68F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBN_Application", "SBN_Application.csproj", "{AFF69148-A6E9-432D-8BC1-F0CC45F3D68F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
