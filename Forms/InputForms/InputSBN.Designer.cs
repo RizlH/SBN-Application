@@ -31,16 +31,17 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
+            textBoxNamaSBN = new TextBox();
+            textBoxKodeSBN = new TextBox();
+            textBoxDesSBN = new TextBox();
             label4 = new Label();
-            textBox4 = new TextBox();
+            textBoxTipeSBN = new TextBox();
             label5 = new Label();
-            textBox5 = new TextBox();
-            button1 = new Button();
+            textBoxMinSBN = new TextBox();
+            buttonAddSBN = new Button();
             label6 = new Label();
-            textBox6 = new TextBox();
+            textBoxFixSBN = new TextBox();
+            buttonDelSBN = new Button();
             SuspendLayout();
             // 
             // label1
@@ -51,6 +52,7 @@
             label1.Size = new Size(97, 25);
             label1.TabIndex = 0;
             label1.Text = "Nama SBN";
+            label1.Click += label1_Click;
             // 
             // label2
             // 
@@ -70,26 +72,26 @@
             label3.TabIndex = 2;
             label3.Text = "Fixed Rated";
             // 
-            // textBox1
+            // textBoxNamaSBN
             // 
-            textBox1.Location = new Point(214, 36);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(232, 31);
-            textBox1.TabIndex = 3;
+            textBoxNamaSBN.Location = new Point(269, 36);
+            textBoxNamaSBN.Name = "textBoxNamaSBN";
+            textBoxNamaSBN.Size = new Size(232, 31);
+            textBoxNamaSBN.TabIndex = 3;
             // 
-            // textBox2
+            // textBoxKodeSBN
             // 
-            textBox2.Location = new Point(214, 107);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(232, 31);
-            textBox2.TabIndex = 4;
+            textBoxKodeSBN.Location = new Point(269, 107);
+            textBoxKodeSBN.Name = "textBoxKodeSBN";
+            textBoxKodeSBN.Size = new Size(232, 31);
+            textBoxKodeSBN.TabIndex = 4;
             // 
-            // textBox3
+            // textBoxDesSBN
             // 
-            textBox3.Location = new Point(214, 176);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(232, 31);
-            textBox3.TabIndex = 5;
+            textBoxDesSBN.Location = new Point(269, 176);
+            textBoxDesSBN.Name = "textBoxDesSBN";
+            textBoxDesSBN.Size = new Size(232, 31);
+            textBoxDesSBN.TabIndex = 5;
             // 
             // label4
             // 
@@ -100,12 +102,12 @@
             label4.TabIndex = 6;
             label4.Text = "Deskripsi";
             // 
-            // textBox4
+            // textBoxTipeSBN
             // 
-            textBox4.Location = new Point(214, 248);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(232, 31);
-            textBox4.TabIndex = 7;
+            textBoxTipeSBN.Location = new Point(269, 248);
+            textBoxTipeSBN.Name = "textBoxTipeSBN";
+            textBoxTipeSBN.Size = new Size(232, 31);
+            textBoxTipeSBN.TabIndex = 7;
             // 
             // label5
             // 
@@ -116,21 +118,21 @@
             label5.TabIndex = 8;
             label5.Text = "Minimal Pembelian";
             // 
-            // textBox5
+            // textBoxMinSBN
             // 
-            textBox5.Location = new Point(214, 323);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(232, 31);
-            textBox5.TabIndex = 9;
+            textBoxMinSBN.Location = new Point(269, 323);
+            textBoxMinSBN.Name = "textBoxMinSBN";
+            textBoxMinSBN.Size = new Size(232, 31);
+            textBoxMinSBN.TabIndex = 9;
             // 
-            // button1
+            // buttonAddSBN
             // 
-            button1.Location = new Point(214, 456);
-            button1.Name = "button1";
-            button1.Size = new Size(112, 34);
-            button1.TabIndex = 10;
-            button1.Text = "Tambah";
-            button1.UseVisualStyleBackColor = true;
+            buttonAddSBN.Location = new Point(269, 450);
+            buttonAddSBN.Name = "buttonAddSBN";
+            buttonAddSBN.Size = new Size(112, 34);
+            buttonAddSBN.TabIndex = 10;
+            buttonAddSBN.Text = "Tambah";
+            buttonAddSBN.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -141,33 +143,43 @@
             label6.TabIndex = 11;
             label6.Text = "Tipe Investor";
             // 
-            // textBox6
+            // textBoxFixSBN
             // 
-            textBox6.Location = new Point(214, 391);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(232, 31);
-            textBox6.TabIndex = 12;
+            textBoxFixSBN.Location = new Point(269, 391);
+            textBoxFixSBN.Name = "textBoxFixSBN";
+            textBoxFixSBN.Size = new Size(232, 31);
+            textBoxFixSBN.TabIndex = 12;
+            // 
+            // buttonDelSBN
+            // 
+            buttonDelSBN.Location = new Point(389, 450);
+            buttonDelSBN.Name = "buttonDelSBN";
+            buttonDelSBN.Size = new Size(112, 34);
+            buttonDelSBN.TabIndex = 13;
+            buttonDelSBN.Text = "Hapus";
+            buttonDelSBN.UseVisualStyleBackColor = true;
             // 
             // InputSBN
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(866, 512);
-            Controls.Add(textBox6);
+            ClientSize = new Size(578, 514);
+            Controls.Add(buttonDelSBN);
+            Controls.Add(textBoxFixSBN);
             Controls.Add(label6);
-            Controls.Add(button1);
-            Controls.Add(textBox5);
+            Controls.Add(buttonAddSBN);
+            Controls.Add(textBoxMinSBN);
             Controls.Add(label5);
-            Controls.Add(textBox4);
+            Controls.Add(textBoxTipeSBN);
             Controls.Add(label4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(textBoxDesSBN);
+            Controls.Add(textBoxKodeSBN);
+            Controls.Add(textBoxNamaSBN);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "InputSBN";
-            Text = "InputSBN";
+            Text = "Input Data SBN";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -177,15 +189,16 @@
         private Label label1;
         private Label label2;
         private Label label3;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
+        private TextBox textBoxNamaSBN;
+        private TextBox textBoxKodeSBN;
+        private TextBox textBoxDesSBN;
         private Label label4;
-        private TextBox textBox4;
+        private TextBox textBoxTipeSBN;
         private Label label5;
-        private TextBox textBox5;
-        private Button button1;
+        private TextBox textBoxMinSBN;
+        private Button buttonAddSBN;
         private Label label6;
-        private TextBox textBox6;
+        private TextBox textBoxFixSBN;
+        private Button buttonDelSBN;
     }
 }

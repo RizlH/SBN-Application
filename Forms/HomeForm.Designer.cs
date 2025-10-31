@@ -98,7 +98,7 @@
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "HomeForm";
-            Text = "HomeForm";
+            Text = "Aplikasi SBN";
             Load += HomeForm_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();

@@ -44,6 +44,7 @@
             buttoninputsbn.TabIndex = 7;
             buttoninputsbn.Text = "Input";
             buttoninputsbn.UseVisualStyleBackColor = true;
+            buttoninputsbn.Click += buttoninputsbn_Click;
             // 
             // buttondeletesbn
             // 

@@ -44,6 +44,7 @@
             buttoninputbuyer.TabIndex = 7;
             buttoninputbuyer.Text = "Input";
             buttoninputbuyer.UseVisualStyleBackColor = true;
+            buttoninputbuyer.Click += buttoninputbuyer_Click;
             // 
             // buttondeletebuyer
             // 

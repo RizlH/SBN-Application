@@ -18,10 +18,10 @@ namespace SBN_Application.Forms.Menus
             InitializeComponent();
         }
 
-        private void inputsbnbtn_Click(object sender, EventArgs e)
+        private void buttoninputsbn_Click(object sender, EventArgs e)
         {
-            InputSBN inputSBN = new InputSBN();
-            inputSBN.ShowDialog();
+            InputSBN inputsbn = new InputSBN();
+            inputsbn.ShowDialog();
         }
     }
 }
