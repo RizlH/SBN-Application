@@ -28,12 +28,100 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "InputAsset";
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            comboBoxbuyer = new ComboBox();
+            comboBoxsbn = new ComboBox();
+            textBoxmodal = new TextBox();
+            buttonasset = new Button();
+            SuspendLayout();
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(70, 48);
+            label1.Name = "label1";
+            label1.Size = new Size(46, 20);
+            label1.TabIndex = 0;
+            label1.Text = "Buyer";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(70, 130);
+            label2.Name = "label2";
+            label2.Size = new Size(37, 20);
+            label2.TabIndex = 1;
+            label2.Text = "SBN";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(70, 215);
+            label3.Name = "label3";
+            label3.Size = new Size(52, 20);
+            label3.TabIndex = 2;
+            label3.Text = "Modal";
+            // 
+            // comboBoxbuyer
+            // 
+            comboBoxbuyer.FormattingEnabled = true;
+            comboBoxbuyer.Location = new Point(216, 48);
+            comboBoxbuyer.Name = "comboBoxbuyer";
+            comboBoxbuyer.Size = new Size(201, 28);
+            comboBoxbuyer.TabIndex = 3;
+            // 
+            // comboBoxsbn
+            // 
+            comboBoxsbn.FormattingEnabled = true;
+            comboBoxsbn.Location = new Point(216, 122);
+            comboBoxsbn.Name = "comboBoxsbn";
+            comboBoxsbn.Size = new Size(201, 28);
+            comboBoxsbn.TabIndex = 4;
+            // 
+            // textBoxmodal
+            // 
+            textBoxmodal.Location = new Point(216, 208);
+            textBoxmodal.Name = "textBoxmodal";
+            textBoxmodal.Size = new Size(201, 27);
+            textBoxmodal.TabIndex = 5;
+            // 
+            // buttonasset
+            // 
+            buttonasset.Location = new Point(216, 282);
+            buttonasset.Name = "buttonasset";
+            buttonasset.Size = new Size(94, 29);
+            buttonasset.TabIndex = 6;
+            buttonasset.Text = "Tambah";
+            buttonasset.UseVisualStyleBackColor = true;
+            // 
+            // InputAsset
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(843, 450);
+            Controls.Add(buttonasset);
+            Controls.Add(textBoxmodal);
+            Controls.Add(comboBoxsbn);
+            Controls.Add(comboBoxbuyer);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Name = "InputAsset";
+            Text = "InputAsset";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private ComboBox comboBoxbuyer;
+        private ComboBox comboBoxsbn;
+        private TextBox textBoxmodal;
+        private Button buttonasset;
     }
 }
