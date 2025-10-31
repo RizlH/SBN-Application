@@ -35,8 +35,8 @@
             comboBoxSBN = new ComboBox();
             textBoxModal = new TextBox();
             buttonAddAsset = new Button();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            textBoxDetailBuyer = new TextBox();
+            textBoxDetailSBN = new TextBox();
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
@@ -109,23 +109,23 @@
             buttonAddAsset.Text = "Tambah";
             buttonAddAsset.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // textBoxDetailBuyer
             // 
-            textBox1.Location = new Point(446, 79);
-            textBox1.Margin = new Padding(4);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(349, 99);
-            textBox1.TabIndex = 7;
+            textBoxDetailBuyer.Location = new Point(446, 79);
+            textBoxDetailBuyer.Margin = new Padding(4);
+            textBoxDetailBuyer.Multiline = true;
+            textBoxDetailBuyer.Name = "textBoxDetailBuyer";
+            textBoxDetailBuyer.Size = new Size(349, 99);
+            textBoxDetailBuyer.TabIndex = 7;
             // 
-            // textBox2
+            // textBoxDetailSBN
             // 
-            textBox2.Location = new Point(446, 231);
-            textBox2.Margin = new Padding(4);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(349, 99);
-            textBox2.TabIndex = 8;
+            textBoxDetailSBN.Location = new Point(446, 231);
+            textBoxDetailSBN.Margin = new Padding(4);
+            textBoxDetailSBN.Multiline = true;
+            textBoxDetailSBN.Name = "textBoxDetailSBN";
+            textBoxDetailSBN.Size = new Size(349, 99);
+            textBoxDetailSBN.TabIndex = 8;
             // 
             // label4
             // 
@@ -176,8 +176,8 @@
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(textBoxDetailSBN);
+            Controls.Add(textBoxDetailBuyer);
             Controls.Add(buttonAddAsset);
             Controls.Add(textBoxModal);
             Controls.Add(comboBoxSBN);
@@ -201,8 +201,8 @@
         private ComboBox comboBoxSBN;
         private TextBox textBoxModal;
         private Button buttonAddAsset;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox textBoxDetailBuyer;
+        private TextBox textBoxDetailSBN;
         private Label label4;
         private Label label5;
         private Label label6;
