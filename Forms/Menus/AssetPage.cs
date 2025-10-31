@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SBN_Application.Forms.InputForms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,12 @@ namespace SBN_Application.Forms.Menus
         public AssetPage()
         {
             InitializeComponent();
+        }
+
+        private void buttoninputasset_Click(object sender, EventArgs e)
+        {
+            InputAsset inputasset = new InputAsset();
+            inputasset.ShowDialog();
         }
     }
 }

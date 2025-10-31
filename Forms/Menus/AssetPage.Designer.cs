@@ -70,6 +70,7 @@
             buttoninputasset.TabIndex = 3;
             buttoninputasset.Text = "Input";
             buttoninputasset.UseVisualStyleBackColor = true;
+            buttoninputasset.Click += buttoninputasset_Click;
             // 
             // AssetPage
             // 
@@ -80,7 +81,7 @@
             Controls.Add(buttondeleteasset);
             Controls.Add(dataGridViewasset);
             Controls.Add(label1);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "AssetPage";
             Size = new Size(800, 432);
             ((System.ComponentModel.ISupportInitialize)dataGridViewasset).EndInit();
