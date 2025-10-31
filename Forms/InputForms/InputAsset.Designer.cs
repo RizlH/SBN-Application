@@ -31,14 +31,16 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
-            comboBoxbuyer = new ComboBox();
-            comboBoxsbn = new ComboBox();
-            textBoxmodal = new TextBox();
-            buttonasset = new Button();
+            comboBoxBuyer = new ComboBox();
+            comboBoxSBN = new ComboBox();
+            textBoxModal = new TextBox();
+            buttonAddAsset = new Button();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
             label4 = new Label();
             label5 = new Label();
+            label6 = new Label();
+            comboBoxTenor = new ComboBox();
             SuspendLayout();
             // 
             // label1
@@ -71,41 +73,41 @@
             label3.TabIndex = 2;
             label3.Text = "Modal";
             // 
-            // comboBoxbuyer
+            // comboBoxBuyer
             // 
-            comboBoxbuyer.FormattingEnabled = true;
-            comboBoxbuyer.Location = new Point(142, 48);
-            comboBoxbuyer.Margin = new Padding(4);
-            comboBoxbuyer.Name = "comboBoxbuyer";
-            comboBoxbuyer.Size = new Size(250, 33);
-            comboBoxbuyer.TabIndex = 3;
+            comboBoxBuyer.FormattingEnabled = true;
+            comboBoxBuyer.Location = new Point(142, 48);
+            comboBoxBuyer.Margin = new Padding(4);
+            comboBoxBuyer.Name = "comboBoxBuyer";
+            comboBoxBuyer.Size = new Size(250, 33);
+            comboBoxBuyer.TabIndex = 3;
             // 
-            // comboBoxsbn
+            // comboBoxSBN
             // 
-            comboBoxsbn.FormattingEnabled = true;
-            comboBoxsbn.Location = new Point(142, 199);
-            comboBoxsbn.Margin = new Padding(4);
-            comboBoxsbn.Name = "comboBoxsbn";
-            comboBoxsbn.Size = new Size(250, 33);
-            comboBoxsbn.TabIndex = 4;
+            comboBoxSBN.FormattingEnabled = true;
+            comboBoxSBN.Location = new Point(142, 199);
+            comboBoxSBN.Margin = new Padding(4);
+            comboBoxSBN.Name = "comboBoxSBN";
+            comboBoxSBN.Size = new Size(250, 33);
+            comboBoxSBN.TabIndex = 4;
             // 
-            // textBoxmodal
+            // textBoxModal
             // 
-            textBoxmodal.Location = new Point(142, 359);
-            textBoxmodal.Margin = new Padding(4);
-            textBoxmodal.Name = "textBoxmodal";
-            textBoxmodal.Size = new Size(250, 31);
-            textBoxmodal.TabIndex = 5;
+            textBoxModal.Location = new Point(142, 359);
+            textBoxModal.Margin = new Padding(4);
+            textBoxModal.Name = "textBoxModal";
+            textBoxModal.Size = new Size(250, 31);
+            textBoxModal.TabIndex = 5;
             // 
-            // buttonasset
+            // buttonAddAsset
             // 
-            buttonasset.Location = new Point(446, 413);
-            buttonasset.Margin = new Padding(4);
-            buttonasset.Name = "buttonasset";
-            buttonasset.Size = new Size(118, 36);
-            buttonasset.TabIndex = 6;
-            buttonasset.Text = "Tambah";
-            buttonasset.UseVisualStyleBackColor = true;
+            buttonAddAsset.Location = new Point(446, 447);
+            buttonAddAsset.Margin = new Padding(4);
+            buttonAddAsset.Name = "buttonAddAsset";
+            buttonAddAsset.Size = new Size(118, 36);
+            buttonAddAsset.TabIndex = 6;
+            buttonAddAsset.Text = "Tambah";
+            buttonAddAsset.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
@@ -145,19 +147,41 @@
             label5.TabIndex = 10;
             label5.Text = "Detail SBN:";
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(58, 401);
+            label6.Margin = new Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(55, 25);
+            label6.TabIndex = 11;
+            label6.Text = "Tenor";
+            // 
+            // comboBoxTenor
+            // 
+            comboBoxTenor.FormattingEnabled = true;
+            comboBoxTenor.Items.AddRange(new object[] { "1 Tahun", "2 Tahun", "3 Tahun", "4 Tahun", "5 Tahun", "6 Tahun" });
+            comboBoxTenor.Location = new Point(142, 401);
+            comboBoxTenor.Margin = new Padding(4);
+            comboBoxTenor.Name = "comboBoxTenor";
+            comboBoxTenor.Size = new Size(250, 33);
+            comboBoxTenor.TabIndex = 12;
+            // 
             // InputAsset
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(865, 514);
+            Controls.Add(comboBoxTenor);
+            Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
-            Controls.Add(buttonasset);
-            Controls.Add(textBoxmodal);
-            Controls.Add(comboBoxsbn);
-            Controls.Add(comboBoxbuyer);
+            Controls.Add(buttonAddAsset);
+            Controls.Add(textBoxModal);
+            Controls.Add(comboBoxSBN);
+            Controls.Add(comboBoxBuyer);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -173,13 +197,15 @@
         private Label label1;
         private Label label2;
         private Label label3;
-        private ComboBox comboBoxbuyer;
-        private ComboBox comboBoxsbn;
-        private TextBox textBoxmodal;
-        private Button buttonasset;
+        private ComboBox comboBoxBuyer;
+        private ComboBox comboBoxSBN;
+        private TextBox textBoxModal;
+        private Button buttonAddAsset;
         private TextBox textBox1;
         private TextBox textBox2;
         private Label label4;
         private Label label5;
+        private Label label6;
+        private ComboBox comboBoxTenor;
     }
 }

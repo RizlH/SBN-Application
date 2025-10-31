@@ -28,28 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            buttonDelSBN = new Button();
+            buttonDelBuyer = new Button();
             label6 = new Label();
-            buttonAddSBN = new Button();
-            textBoxMinSBN = new TextBox();
+            buttonAddBuyer = new Button();
+            textBoxNoRek = new TextBox();
             label5 = new Label();
-            textBoxTipeSBN = new TextBox();
+            textBoxAlamatBuyer = new TextBox();
             label4 = new Label();
-            textBoxDesSBN = new TextBox();
-            textBoxKodeSBN = new TextBox();
-            textBoxNamaSBN = new TextBox();
+            textBoxEmailBuyer = new TextBox();
+            textBoxNoTelp = new TextBox();
+            textBoxNamaBuyer = new TextBox();
             label2 = new Label();
             label1 = new Label();
             SuspendLayout();
             // 
-            // buttonDelSBN
+            // buttonDelBuyer
             // 
-            buttonDelSBN.Location = new Point(405, 410);
-            buttonDelSBN.Name = "buttonDelSBN";
-            buttonDelSBN.Size = new Size(112, 34);
-            buttonDelSBN.TabIndex = 27;
-            buttonDelSBN.Text = "Hapus";
-            buttonDelSBN.UseVisualStyleBackColor = true;
+            buttonDelBuyer.Location = new Point(405, 410);
+            buttonDelBuyer.Name = "buttonDelBuyer";
+            buttonDelBuyer.Size = new Size(112, 34);
+            buttonDelBuyer.TabIndex = 27;
+            buttonDelBuyer.Text = "Hapus";
+            buttonDelBuyer.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -60,21 +60,21 @@
             label6.TabIndex = 25;
             label6.Text = "Alamat";
             // 
-            // buttonAddSBN
+            // buttonAddBuyer
             // 
-            buttonAddSBN.Location = new Point(285, 410);
-            buttonAddSBN.Name = "buttonAddSBN";
-            buttonAddSBN.Size = new Size(112, 34);
-            buttonAddSBN.TabIndex = 24;
-            buttonAddSBN.Text = "Tambah";
-            buttonAddSBN.UseVisualStyleBackColor = true;
+            buttonAddBuyer.Location = new Point(285, 410);
+            buttonAddBuyer.Name = "buttonAddBuyer";
+            buttonAddBuyer.Size = new Size(112, 34);
+            buttonAddBuyer.TabIndex = 24;
+            buttonAddBuyer.Text = "Tambah";
+            buttonAddBuyer.UseVisualStyleBackColor = true;
             // 
-            // textBoxMinSBN
+            // textBoxNoRek
             // 
-            textBoxMinSBN.Location = new Point(285, 320);
-            textBoxMinSBN.Name = "textBoxMinSBN";
-            textBoxMinSBN.Size = new Size(232, 31);
-            textBoxMinSBN.TabIndex = 23;
+            textBoxNoRek.Location = new Point(285, 320);
+            textBoxNoRek.Name = "textBoxNoRek";
+            textBoxNoRek.Size = new Size(232, 31);
+            textBoxNoRek.TabIndex = 23;
             // 
             // label5
             // 
@@ -85,12 +85,12 @@
             label5.TabIndex = 22;
             label5.Text = "No. Rekening";
             // 
-            // textBoxTipeSBN
+            // textBoxAlamatBuyer
             // 
-            textBoxTipeSBN.Location = new Point(285, 245);
-            textBoxTipeSBN.Name = "textBoxTipeSBN";
-            textBoxTipeSBN.Size = new Size(232, 31);
-            textBoxTipeSBN.TabIndex = 21;
+            textBoxAlamatBuyer.Location = new Point(285, 245);
+            textBoxAlamatBuyer.Name = "textBoxAlamatBuyer";
+            textBoxAlamatBuyer.Size = new Size(232, 31);
+            textBoxAlamatBuyer.TabIndex = 21;
             // 
             // label4
             // 
@@ -101,26 +101,26 @@
             label4.TabIndex = 20;
             label4.Text = "Email";
             // 
-            // textBoxDesSBN
+            // textBoxEmailBuyer
             // 
-            textBoxDesSBN.Location = new Point(285, 173);
-            textBoxDesSBN.Name = "textBoxDesSBN";
-            textBoxDesSBN.Size = new Size(232, 31);
-            textBoxDesSBN.TabIndex = 19;
+            textBoxEmailBuyer.Location = new Point(285, 173);
+            textBoxEmailBuyer.Name = "textBoxEmailBuyer";
+            textBoxEmailBuyer.Size = new Size(232, 31);
+            textBoxEmailBuyer.TabIndex = 19;
             // 
-            // textBoxKodeSBN
+            // textBoxNoTelp
             // 
-            textBoxKodeSBN.Location = new Point(285, 104);
-            textBoxKodeSBN.Name = "textBoxKodeSBN";
-            textBoxKodeSBN.Size = new Size(232, 31);
-            textBoxKodeSBN.TabIndex = 18;
+            textBoxNoTelp.Location = new Point(285, 104);
+            textBoxNoTelp.Name = "textBoxNoTelp";
+            textBoxNoTelp.Size = new Size(232, 31);
+            textBoxNoTelp.TabIndex = 18;
             // 
-            // textBoxNamaSBN
+            // textBoxNamaBuyer
             // 
-            textBoxNamaSBN.Location = new Point(285, 33);
-            textBoxNamaSBN.Name = "textBoxNamaSBN";
-            textBoxNamaSBN.Size = new Size(232, 31);
-            textBoxNamaSBN.TabIndex = 17;
+            textBoxNamaBuyer.Location = new Point(285, 33);
+            textBoxNamaBuyer.Name = "textBoxNamaBuyer";
+            textBoxNamaBuyer.Size = new Size(232, 31);
+            textBoxNamaBuyer.TabIndex = 17;
             // 
             // label2
             // 
@@ -145,16 +145,16 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(578, 514);
-            Controls.Add(buttonDelSBN);
+            Controls.Add(buttonDelBuyer);
             Controls.Add(label6);
-            Controls.Add(buttonAddSBN);
-            Controls.Add(textBoxMinSBN);
+            Controls.Add(buttonAddBuyer);
+            Controls.Add(textBoxNoRek);
             Controls.Add(label5);
-            Controls.Add(textBoxTipeSBN);
+            Controls.Add(textBoxAlamatBuyer);
             Controls.Add(label4);
-            Controls.Add(textBoxDesSBN);
-            Controls.Add(textBoxKodeSBN);
-            Controls.Add(textBoxNamaSBN);
+            Controls.Add(textBoxEmailBuyer);
+            Controls.Add(textBoxNoTelp);
+            Controls.Add(textBoxNamaBuyer);
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "InputBuyer";
@@ -165,16 +165,16 @@
 
         #endregion
 
-        private Button buttonDelSBN;
+        private Button buttonDelBuyer;
         private Label label6;
-        private Button buttonAddSBN;
-        private TextBox textBoxMinSBN;
+        private Button buttonAddBuyer;
+        private TextBox textBoxNoRek;
         private Label label5;
-        private TextBox textBoxTipeSBN;
+        private TextBox textBoxAlamatBuyer;
         private Label label4;
-        private TextBox textBoxDesSBN;
-        private TextBox textBoxKodeSBN;
-        private TextBox textBoxNamaSBN;
+        private TextBox textBoxEmailBuyer;
+        private TextBox textBoxNoTelp;
+        private TextBox textBoxNamaBuyer;
         private Label label2;
         private Label label1;
     }
