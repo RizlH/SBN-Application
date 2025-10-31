@@ -28,66 +28,65 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
+            buttoninputsbn = new Button();
+            buttondeletesbn = new Button();
             dataGridViewsbn = new DataGridView();
-            inputsbnbtn = new Button();
-            button1 = new Button();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridViewsbn).BeginInit();
             SuspendLayout();
             // 
-            // label1
+            // buttoninputsbn
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(34, 24);
-            label1.Margin = new Padding(2, 0, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(84, 20);
-            label1.TabIndex = 0;
-            label1.Text = "SBN PAGES";
+            buttoninputsbn.Location = new Point(808, 38);
+            buttoninputsbn.Margin = new Padding(4);
+            buttoninputsbn.Name = "buttoninputsbn";
+            buttoninputsbn.Size = new Size(118, 36);
+            buttoninputsbn.TabIndex = 7;
+            buttoninputsbn.Text = "Input";
+            buttoninputsbn.UseVisualStyleBackColor = true;
+            // 
+            // buttondeletesbn
+            // 
+            buttondeletesbn.Location = new Point(652, 38);
+            buttondeletesbn.Margin = new Padding(4);
+            buttondeletesbn.Name = "buttondeletesbn";
+            buttondeletesbn.Size = new Size(118, 36);
+            buttondeletesbn.TabIndex = 6;
+            buttondeletesbn.Text = "Delete";
+            buttondeletesbn.UseVisualStyleBackColor = true;
             // 
             // dataGridViewsbn
             // 
             dataGridViewsbn.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewsbn.Location = new Point(34, 65);
-            dataGridViewsbn.Margin = new Padding(2, 2, 2, 2);
+            dataGridViewsbn.Location = new Point(54, 96);
+            dataGridViewsbn.Margin = new Padding(4);
             dataGridViewsbn.Name = "dataGridViewsbn";
-            dataGridViewsbn.RowHeadersWidth = 62;
-            dataGridViewsbn.Size = new Size(730, 306);
-            dataGridViewsbn.TabIndex = 1;
+            dataGridViewsbn.RowHeadersWidth = 51;
+            dataGridViewsbn.Size = new Size(872, 378);
+            dataGridViewsbn.TabIndex = 5;
             // 
-            // inputsbnbtn
+            // label1
             // 
-            inputsbnbtn.Location = new Point(659, 17);
-            inputsbnbtn.Margin = new Padding(2, 2, 2, 2);
-            inputsbnbtn.Name = "inputsbnbtn";
-            inputsbnbtn.Size = new Size(90, 27);
-            inputsbnbtn.TabIndex = 2;
-            inputsbnbtn.Text = "Input";
-            inputsbnbtn.UseVisualStyleBackColor = true;
-            inputsbnbtn.Click += inputsbnbtn_Click;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(535, 17);
-            button1.Margin = new Padding(2, 2, 2, 2);
-            button1.Name = "button1";
-            button1.Size = new Size(90, 27);
-            button1.TabIndex = 3;
-            button1.Text = "Delete";
-            button1.UseVisualStyleBackColor = true;
+            label1.AutoSize = true;
+            label1.Location = new Point(54, 44);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(88, 25);
+            label1.TabIndex = 4;
+            label1.Text = "SBN Page";
             // 
             // SBNPage
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(227, 253, 253);
-            Controls.Add(button1);
-            Controls.Add(inputsbnbtn);
+            Controls.Add(buttoninputsbn);
+            Controls.Add(buttondeletesbn);
             Controls.Add(dataGridViewsbn);
             Controls.Add(label1);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "SBNPage";
-            Size = new Size(800, 400);
+            Size = new Size(1000, 500);
             ((System.ComponentModel.ISupportInitialize)dataGridViewsbn).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -95,9 +94,9 @@
 
         #endregion
 
-        private Label label1;
+        private Button buttoninputsbn;
+        private Button buttondeletesbn;
         private DataGridView dataGridViewsbn;
-        private Button inputsbnbtn;
-        private Button button1;
+        private Label label1;
     }
 }

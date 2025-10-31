@@ -38,35 +38,39 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(51, 29);
+            label1.Location = new Point(54, 44);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(80, 20);
+            label1.Size = new Size(98, 25);
             label1.TabIndex = 0;
             label1.Text = "Asset Page";
             // 
             // dataGridViewasset
             // 
             dataGridViewasset.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewasset.Location = new Point(51, 90);
+            dataGridViewasset.Location = new Point(54, 96);
+            dataGridViewasset.Margin = new Padding(4);
             dataGridViewasset.Name = "dataGridViewasset";
             dataGridViewasset.RowHeadersWidth = 51;
-            dataGridViewasset.Size = new Size(698, 302);
+            dataGridViewasset.Size = new Size(872, 378);
             dataGridViewasset.TabIndex = 1;
             // 
             // buttondeleteasset
             // 
-            buttondeleteasset.Location = new Point(501, 29);
+            buttondeleteasset.Location = new Point(652, 38);
+            buttondeleteasset.Margin = new Padding(4);
             buttondeleteasset.Name = "buttondeleteasset";
-            buttondeleteasset.Size = new Size(94, 29);
+            buttondeleteasset.Size = new Size(118, 36);
             buttondeleteasset.TabIndex = 2;
             buttondeleteasset.Text = "Delete";
             buttondeleteasset.UseVisualStyleBackColor = true;
             // 
             // buttoninputasset
             // 
-            buttoninputasset.Location = new Point(626, 29);
+            buttoninputasset.Location = new Point(808, 38);
+            buttoninputasset.Margin = new Padding(4);
             buttoninputasset.Name = "buttoninputasset";
-            buttoninputasset.Size = new Size(94, 29);
+            buttoninputasset.Size = new Size(118, 36);
             buttoninputasset.TabIndex = 3;
             buttoninputasset.Text = "Input";
             buttoninputasset.UseVisualStyleBackColor = true;
@@ -74,7 +78,7 @@
             // 
             // AssetPage
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(227, 253, 253);
             Controls.Add(buttoninputasset);
@@ -83,7 +87,7 @@
             Controls.Add(label1);
             Margin = new Padding(2);
             Name = "AssetPage";
-            Size = new Size(800, 432);
+            Size = new Size(1000, 500);
             ((System.ComponentModel.ISupportInitialize)dataGridViewasset).EndInit();
             ResumeLayout(false);
             PerformLayout();
