@@ -17,5 +17,38 @@ namespace SBN_Application.Forms
             InitializeComponent();
         }
 
+        private void ShowPage(UserControl page)
+        {
+            panelContainer.Controls.Clear();
+            page.Dock = DockStyle.Fill;
+            panelContainer.Controls.Add(page);
+            page.BringToFront();
+        }
+
+
+        private void buyerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowPage(new Menus.BuyerPage());
+        }
+
+        private void homeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowPage(new Menus.Dashboard());
+        }
+
+        private void HomeForm_Load(object sender, EventArgs e)
+        {
+            ShowPage(new Menus.Dashboard());
+        }
+
+        private void sbnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowPage(new Menus.SBNPage());
+        }
+
+        private void assetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowPage(new Menus.AssetPage());
+        }
     }
 }
