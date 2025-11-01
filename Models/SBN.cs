@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace SBN_Application.Models
 {
     public class SBN
     {
+        [Key]
         public int Id_Sbn { get; set; }
         public string Nama_Sbn { get; set; }
         public string Kode_Sbn { get; set; }

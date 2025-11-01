@@ -24,7 +24,7 @@ namespace SBN_Application.Data
             if (!optionsBuilder.IsConfigured)
             {
                 // Connection string - Ganti sesuai dengan konfigurasi database Anda
-                optionsBuilder.UseNpgsql("Host=localhost;Database=db_vb2_sbn;Username=postgres;Password=rizal0857");
+                optionsBuilder.UseNpgsql("Host=localhost;Database=db_vb2_sbn;Username=postgres;Password=admin123");
             }
         }
 

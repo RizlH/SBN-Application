@@ -6,7 +6,7 @@ namespace SBN_Application.Models
 {
     public class Buyer
     {
-
+        [Key]
         public int Id_Buyer { get; set; }
         public string Nama_Buyer { get; set; }
         public string No_Telp { get; set; }
