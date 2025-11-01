@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 using SBN_Application.Forms.InputForms;
 using SBN_Application.Data;
+using SBN_Application.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace SBN_Application.Forms.Menus
@@ -10,11 +12,13 @@ namespace SBN_Application.Forms.Menus
     public partial class BuyerPage : UserControl
     {
         private readonly AppDbContext _context;
+        private readonly BuyerService _buyerService;
 
         public BuyerPage()
         {
             InitializeComponent();
             _context = new AppDbContext();
+            _buyerService = new BuyerService(_context);
 
             // Wire up event handlers
             buttondeletebuyer.Click += ButtonDeleteBuyer_Click;
@@ -27,7 +31,7 @@ namespace SBN_Application.Forms.Menus
         private void BuyerPage_Load(object sender, EventArgs e)
         {
             ConfigureDataGridView();
-            LoadBuyerData();
+            LoadBuyerDataAsync();
         }
 
         // Konfigurasi DataGridView
@@ -38,7 +42,7 @@ namespace SBN_Application.Forms.Menus
             dataGridViewbuyer.MultiSelect = false;
             dataGridViewbuyer.ReadOnly = true;
             dataGridViewbuyer.AllowUserToAddRows = false;
-            dataGridViewbuyer.RowHeadersVisible = false; // Sembunyikan header row
+            dataGridViewbuyer.RowHeadersVisible = false;
 
             // Clear existing columns
             dataGridViewbuyer.Columns.Clear();
@@ -49,7 +53,7 @@ namespace SBN_Application.Forms.Menus
                 DataPropertyName = "Id_Buyer",
                 HeaderText = "ID",
                 Name = "Id_Buyer",
-                Visible = false // SEMBUNYIKAN KOLOM ID
+                Visible = false
             });
 
             dataGridViewbuyer.Columns.Add(new DataGridViewTextBoxColumn
@@ -105,63 +109,98 @@ namespace SBN_Application.Forms.Menus
             });
         }
 
-        // Load data buyer ke DataGridView
-        private void LoadBuyerData()
+        // Load data buyer ke DataGridView menggunakan BuyerService
+        private async Task LoadBuyerDataAsync()
         {
             try
             {
-                // Buat context baru untuk setiap load data
-                using (var loadContext = new AppDbContext())
+                // Suspend layout untuk performa lebih baik
+                dataGridViewbuyer.SuspendLayout();
+
+                // Simpan posisi scroll jika ada
+                int firstDisplayedScrollingRowIndex = 0;
+                if (dataGridViewbuyer.FirstDisplayedScrollingRowIndex >= 0)
                 {
-                    var buyers = loadContext.Buyers
-                        .OrderBy(b => b.Nama_Buyer)
-                        .ToList();
-
-                    dataGridViewbuyer.DataSource = null; // Reset dulu
-                    dataGridViewbuyer.DataSource = buyers;
-
-                    // Update label untuk menampilkan jumlah data
-                    label1.Text = $"Buyer Page ({buyers.Count} data)";
+                    firstDisplayedScrollingRowIndex = dataGridViewbuyer.FirstDisplayedScrollingRowIndex;
                 }
+
+                // Clear selection dan binding
+                dataGridViewbuyer.ClearSelection();
+                dataGridViewbuyer.DataSource = null;
+
+                // Force clear rows
+                if (dataGridViewbuyer.Rows.Count > 0)
+                {
+                    dataGridViewbuyer.Rows.Clear();
+                }
+
+                // Gunakan service untuk mendapatkan data fresh dari database
+                var buyers = await _buyerService.GetAllBuyers();
+
+                // Rebind data
+                dataGridViewbuyer.DataSource = buyers;
+
+                // Kembalikan posisi scroll
+                if (firstDisplayedScrollingRowIndex < dataGridViewbuyer.Rows.Count && firstDisplayedScrollingRowIndex >= 0)
+                {
+                    dataGridViewbuyer.FirstDisplayedScrollingRowIndex = firstDisplayedScrollingRowIndex;
+                }
+
+                // Update label untuk menampilkan jumlah data
+                label1.Text = $"Buyer Page ({buyers.Count} data)";
+
+                // Resume layout
+                dataGridViewbuyer.ResumeLayout();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error saat memuat data: {ex.Message}", "Error",
+                dataGridViewbuyer.ResumeLayout();
+                MessageBox.Show($"Error saat memuat data: {ex.Message}\n\nDetail: {ex.InnerException?.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         // Event handler untuk tombol Input
-        private void buttoninputbuyer_Click(object sender, EventArgs e)
+        private async void buttoninputbuyer_Click(object sender, EventArgs e)
         {
-            using (InputBuyer inputbuyer = new InputBuyer())
+            using (var inputContext = new AppDbContext())
             {
-                if (inputbuyer.ShowDialog() == DialogResult.OK)
+                var inputService = new BuyerService(inputContext);
+                using (InputBuyer inputbuyer = new InputBuyer(inputContext))
                 {
-                    LoadBuyerData(); // Refresh data setelah input
-                }
-            }
-        }
-
-        // Event handler untuk double click pada row (untuk edit)
-        private void DataGridViewBuyer_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                var buyerId = Convert.ToInt32(dataGridViewbuyer.Rows[e.RowIndex].Cells["Id_Buyer"].Value);
-
-                using (InputBuyer editForm = new InputBuyer(buyerId))
-                {
-                    if (editForm.ShowDialog() == DialogResult.OK)
+                    if (inputbuyer.ShowDialog() == DialogResult.OK)
                     {
-                        LoadBuyerData(); // Refresh data setelah edit
+                        // Refresh menggunakan context utama
+                        await LoadBuyerDataAsync();
                     }
                 }
             }
         }
 
-        // Event handler untuk tombol Delete
-        private void ButtonDeleteBuyer_Click(object sender, EventArgs e)
+        // Event handler untuk double click pada row (untuk edit)
+        private async void DataGridViewBuyer_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var buyerId = Convert.ToInt32(dataGridViewbuyer.Rows[e.RowIndex].Cells["Id_Buyer"].Value);
+
+                using (var editContext = new AppDbContext())
+                {
+                    var editService = new BuyerService(editContext);
+                    using (InputBuyer editForm = new InputBuyer(editContext, buyerId))
+                    {
+                        if (editForm.ShowDialog() == DialogResult.OK)
+                        {
+                            // Refresh menggunakan context utama
+                            await LoadBuyerDataAsync();
+                        }
+                    }
+                }
+            }
+        }
+
+        // Event handler untuk tombol Delete menggunakan BuyerService
+        private async void ButtonDeleteBuyer_Click(object sender, EventArgs e)
         {
             if (dataGridViewbuyer.SelectedRows.Count == 0)
             {
@@ -184,20 +223,19 @@ namespace SBN_Application.Forms.Menus
             {
                 try
                 {
-                    // Gunakan context baru untuk delete
-                    using (var deleteContext = new AppDbContext())
+                    // Gunakan service untuk delete
+                    bool deleted = await _buyerService.DeleteBuyer(buyerId);
+
+                    if (deleted)
                     {
-                        var buyer = deleteContext.Buyers.Find(buyerId);
-                        if (buyer != null)
-                        {
-                            deleteContext.Buyers.Remove(buyer);
-                            deleteContext.SaveChanges();
-
-                            MessageBox.Show("Data buyer berhasil dihapus!", "Sukses",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                            LoadBuyerData(); // Refresh data
-                        }
+                        MessageBox.Show("Data buyer berhasil dihapus!", "Sukses",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        await LoadBuyerDataAsync(); // Refresh data
+                    }
+                    else
+                    {
+                        MessageBox.Show("Data buyer tidak ditemukan!", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
@@ -207,5 +245,6 @@ namespace SBN_Application.Forms.Menus
                 }
             }
         }
+
     }
 }

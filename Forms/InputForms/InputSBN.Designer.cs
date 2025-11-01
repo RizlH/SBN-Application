@@ -52,7 +52,6 @@
             label1.Size = new Size(97, 25);
             label1.TabIndex = 0;
             label1.Text = "Nama SBN";
-            label1.Click += label1_Click;
             // 
             // label2
             // 

@@ -1,48 +1,63 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 using SBN_Application.Data;
 using SBN_Application.Models;
-using Microsoft.EntityFrameworkCore;
+using SBN_Application.Services;
 
 namespace SBN_Application.Forms.InputForms
 {
     public partial class InputBuyer : Form
     {
-        private AppDbContext _context;
-        private int? _buyerId = null;
-        private bool _isEditMode = false;
+        private readonly AppDbContext _context;
+        private readonly BuyerService _buyerService;
+        private int? _buyerId;
+        private bool _isEditMode;
 
-        // Constructor untuk mode tambah
-        public InputBuyer()
+        // Constructor untuk mode Add (tanpa buyerId)
+        public InputBuyer(AppDbContext context)
         {
             InitializeComponent();
-            _context = new AppDbContext();
+            _context = context;
+            _buyerService = new BuyerService(_context);
             _isEditMode = false;
-            this.Text = "Tambah Data Buyer";
+            _buyerId = null;
+
+            this.Load += InputBuyer_Load;
         }
 
-        // Constructor untuk mode edit
-        public InputBuyer(int buyerId)
+        // Constructor untuk mode Edit (dengan buyerId)
+        public InputBuyer(AppDbContext context, int buyerId)
         {
             InitializeComponent();
-            _context = new AppDbContext();
-
-            _buyerId = buyerId;
+            _context = context;
+            _buyerService = new BuyerService(_context);
             _isEditMode = true;
-            this.Text = "Edit Data Buyer";
-            buttonDelBuyer.Visible = true;
-            buttonAddBuyer.Text = "Update";
+            _buyerId = buyerId;
 
-            LoadBuyerData();
+            this.Load += InputBuyer_Load;
         }
 
-        // Load data buyer untuk edit
-        private void LoadBuyerData()
+        private async void InputBuyer_Load(object sender, EventArgs e)
+        {
+            if (_isEditMode && _buyerId.HasValue)
+            {
+                this.Text = "Edit Buyer";
+                await LoadBuyerData(_buyerId.Value);
+            }
+            else
+            {
+                this.Text = "Tambah Buyer";
+            }
+        }
+
+        // Load data buyer untuk mode edit
+        private async Task LoadBuyerData(int buyerId)
         {
             try
             {
-                var buyer = _context.Buyers.Find(_buyerId);
+                var buyer = await _buyerService.GetBuyer(buyerId);
+
                 if (buyer != null)
                 {
                     textBoxNamaBuyer.Text = buyer.Nama_Buyer;
@@ -55,7 +70,6 @@ namespace SBN_Application.Forms.InputForms
                 {
                     MessageBox.Show("Data buyer tidak ditemukan!", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    this.DialogResult = DialogResult.Cancel;
                     this.Close();
                 }
             }
@@ -63,28 +77,32 @@ namespace SBN_Application.Forms.InputForms
             {
                 MessageBox.Show($"Error saat memuat data: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.DialogResult = DialogResult.Cancel;
                 this.Close();
             }
         }
 
-        // Event handler untuk tombol Tambah/Update
-        private void ButtonAddBuyer_Click(object sender, EventArgs e)
+        // Event handler untuk tombol Save
+        private async void buttonAddBuyer_Click(object sender, EventArgs e)
         {
             // Validasi input
             if (!ValidateInput())
+            {
                 return;
+            }
 
             try
             {
-                if (_isEditMode)
+                if (_isEditMode && _buyerId.HasValue)
                 {
-                    UpdateBuyer();
+                    await UpdateBuyer();
                 }
                 else
                 {
-                    AddBuyer();
+                    await AddNewBuyer();
                 }
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -93,7 +111,85 @@ namespace SBN_Application.Forms.InputForms
             }
         }
 
-        // Validasi input
+        // Tambah buyer baru menggunakan BuyerService
+        private async Task AddNewBuyer()
+        {
+            try
+            {
+                // Validasi email duplikat
+                bool emailExists = await _buyerService.EmailExists(textBoxEmailBuyer.Text.Trim());
+                if (emailExists)
+                {
+                    MessageBox.Show("Email sudah digunakan oleh buyer lain!", "Validasi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    throw new Exception("Email duplikat");
+                }
+
+                var newBuyer = new Buyer
+                {
+                    Nama_Buyer = textBoxNamaBuyer.Text.Trim(),
+                    No_Telp = textBoxNoTelp.Text.Trim(),
+                    Email = textBoxEmailBuyer.Text.Trim(),
+                    Alamat = textBoxAlamatBuyer.Text.Trim(),
+                    No_Rek = textBoxNoRek.Text.Trim(),
+                    Created_At = DateTime.Now
+                };
+
+                await _buyerService.AddBuyer(newBuyer);
+
+                MessageBox.Show("Data buyer berhasil ditambahkan!", "Sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Gagal menambahkan buyer: {ex.Message}", ex);
+            }
+        }
+
+        // Update buyer menggunakan BuyerService
+        private async Task UpdateBuyer()
+        {
+            try
+            {
+                // Validasi email duplikat (kecuali email sendiri)
+                bool emailExists = await _buyerService.EmailExists(
+                    textBoxEmailBuyer.Text.Trim(),
+                    _buyerId.Value);
+
+                if (emailExists)
+                {
+                    MessageBox.Show("Email sudah digunakan oleh buyer lain!", "Validasi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    throw new Exception("Email duplikat");
+                }
+
+                var buyer = await _buyerService.GetBuyer(_buyerId.Value);
+
+                if (buyer != null)
+                {
+                    buyer.Nama_Buyer = textBoxNamaBuyer.Text.Trim();
+                    buyer.No_Telp = textBoxNoTelp.Text.Trim();
+                    buyer.Email = textBoxEmailBuyer.Text.Trim();
+                    buyer.Alamat = textBoxAlamatBuyer.Text.Trim();
+                    buyer.No_Rek = textBoxNoRek.Text.Trim();
+
+                    await _buyerService.UpdateBuyer(buyer);
+
+                    MessageBox.Show("Data buyer berhasil diupdate!", "Sukses",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    throw new Exception("Data buyer tidak ditemukan");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Gagal mengupdate buyer: {ex.Message}", ex);
+            }
+        }
+
+        // Validasi input form
         private bool ValidateInput()
         {
             if (string.IsNullOrWhiteSpace(textBoxNamaBuyer.Text))
@@ -121,7 +217,7 @@ namespace SBN_Application.Forms.InputForms
             }
 
             // Validasi format email sederhana
-            if (!textBoxEmailBuyer.Text.Contains("@") || !textBoxEmailBuyer.Text.Contains("."))
+            if (!IsValidEmail(textBoxEmailBuyer.Text.Trim()))
             {
                 MessageBox.Show("Format email tidak valid!", "Validasi",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -148,120 +244,17 @@ namespace SBN_Application.Forms.InputForms
             return true;
         }
 
-        // Tambah buyer baru
-        private void AddBuyer()
+        // Validasi format email
+        private bool IsValidEmail(string email)
         {
             try
             {
-                var buyer = new Buyer
-                {
-                    Nama_Buyer = textBoxNamaBuyer.Text.Trim(),
-                    No_Telp = textBoxNoTelp.Text.Trim(),
-                    Email = textBoxEmailBuyer.Text.Trim(),
-                    Alamat = textBoxAlamatBuyer.Text.Trim(),
-                    No_Rek = textBoxNoRek.Text.Trim(),
-                    Created_At = DateTime.Now
-                };
-
-                _context.Buyers.Add(buyer);
-
-                // Simpan dengan error handling detail
-                try
-                {
-                    _context.SaveChanges();
-                }
-                catch (DbUpdateException dbEx)
-                {
-                    var innerException = dbEx.InnerException?.Message ?? dbEx.Message;
-                    MessageBox.Show($"Database Error:\n{innerException}\n\nPastikan:\n1. Tabel 'Buyers' sudah dibuat\n2. Semua kolom sudah sesuai\n3. Database PostgreSQL sudah running",
-                        "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                MessageBox.Show("Data buyer berhasil ditambahkan!", "Sukses",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                // Clear form untuk input berikutnya
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-                ClearForm();
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show($"Error: {ex.Message}\n\nInner Exception: {ex.InnerException?.Message}",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        // Update buyer
-        private void UpdateBuyer()
-        {
-            try
-            {
-                var buyer = _context.Buyers.Find(_buyerId);
-                if (buyer != null)
-                {
-                    buyer.Nama_Buyer = textBoxNamaBuyer.Text.Trim();
-                    buyer.No_Telp = textBoxNoTelp.Text.Trim();
-                    buyer.Email = textBoxEmailBuyer.Text.Trim();
-                    buyer.Alamat = textBoxAlamatBuyer.Text.Trim();
-                    buyer.No_Rek = textBoxNoRek.Text.Trim();
-
-                    _context.SaveChanges();
-
-                    MessageBox.Show("Data buyer berhasil diupdate!", "Sukses",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Data buyer tidak ditemukan!", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error saat mengupdate data: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        // Event handler untuk tombol Hapus
-        private void ButtonDelBuyer_Click(object sender, EventArgs e)
-        {
-            if (!_isEditMode || !_buyerId.HasValue)
-                return;
-
-            var result = MessageBox.Show(
-                "Apakah Anda yakin ingin menghapus data buyer ini?",
-                "Konfirmasi Hapus",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                try
-                {
-                    var buyer = _context.Buyers.Find(_buyerId);
-                    if (buyer != null)
-                    {
-                        _context.Buyers.Remove(buyer);
-                        _context.SaveChanges();
-
-                        MessageBox.Show("Data buyer berhasil dihapus!", "Sukses",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error saat menghapus data: {ex.Message}", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                return false;
             }
         }
 
@@ -276,7 +269,8 @@ namespace SBN_Application.Forms.InputForms
             textBoxNamaBuyer.Focus();
         }
 
-        private void buttonDelBuyer_Click_1(object sender, EventArgs e)
+        // Event handler untuk tombol Cancel
+        private void buttonDelBuyer_Click(object sender, EventArgs e)
         {
             ClearForm();
         }

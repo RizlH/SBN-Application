@@ -50,7 +50,7 @@
             buttonDelBuyer.TabIndex = 27;
             buttonDelBuyer.Text = "Hapus";
             buttonDelBuyer.UseVisualStyleBackColor = true;
-            buttonDelBuyer.Click += buttonDelBuyer_Click_1;
+            buttonDelBuyer.Click += buttonDelBuyer_Click;
             // 
             // label6
             // 
@@ -69,7 +69,7 @@
             buttonAddBuyer.TabIndex = 24;
             buttonAddBuyer.Text = "Tambah";
             buttonAddBuyer.UseVisualStyleBackColor = true;
-            buttonAddBuyer.Click += ButtonAddBuyer_Click;
+            buttonAddBuyer.Click += buttonAddBuyer_Click;
             // 
             // textBoxNoRek
             // 

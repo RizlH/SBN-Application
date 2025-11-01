@@ -17,9 +17,5 @@ namespace SBN_Application.Forms.InputForms
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
