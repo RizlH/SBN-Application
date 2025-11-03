@@ -13,7 +13,6 @@ namespace SBN_Application.Forms.Menus
     {
         private readonly AppDbContext _context;
         private readonly SBNService _sbnService;
-        public event EventHandler DataChanged; // Event untuk notify dashboard
 
         public SBNPage()
         {
