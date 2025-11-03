@@ -8,14 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SBN_Application.Data;
+using SBN_Application.Services;
 
 namespace SBN_Application.Forms.Menus
 {
     public partial class Dashboard : UserControl
     {
+        private AppDbContext _context;
+
+
         public Dashboard()
         {
             InitializeComponent();
+            _context = new AppDbContext();
 
             // Load data saat dashboard dimuat
             this.Load += Dashboard_Load;
@@ -30,34 +35,41 @@ namespace SBN_Application.Forms.Menus
         {
             try
             {
-                using (var context = new AppDbContext())
+                // Hitung jumlah Buyer
+                int buyerCount = 0;
+                try
                 {
-                    // Hitung jumlah Buyer
-                    int buyerCount = context.Buyers.Count();
-                    label4.Text = buyerCount.ToString();
-
-                    // Hitung jumlah SBN (jika sudah ada tabel SBN)
-                    try
-                    {
-                        int sbnCount = context.SBNs.Count();
-                        label5.Text = sbnCount.ToString();
-                    }
-                    catch
-                    {
-                        label5.Text = "0";
-                    }
-
-                    // Hitung jumlah Asset (jika sudah ada tabel Asset)
-                    try
-                    {
-                        int assetCount = context.Assets.Count();
-                        label7.Text = assetCount.ToString();
-                    }
-                    catch
-                    {
-                        label7.Text = "0";
-                    }
+                    buyerCount = _context.Buyers.Count();
                 }
+                catch
+                {
+                    buyerCount = 0;
+                }
+                label4.Text = buyerCount.ToString();
+
+                // Hitung jumlah SBN menggunakan SBNService
+                int sbnCount = 0;
+                try
+                {
+                    sbnCount = _context.SBNs.Count();
+                }
+                catch
+                {
+                    sbnCount = 0;
+                }
+                label5.Text = sbnCount.ToString();
+
+                // Hitung jumlah Asset
+                int assetCount = 0;
+                try
+                {
+                    assetCount = _context.Assets.Count();
+                }
+                catch
+                {
+                    assetCount = 0;
+                }
+                label7.Text = assetCount.ToString();
             }
             catch (Exception ex)
             {
@@ -71,7 +83,7 @@ namespace SBN_Application.Forms.Menus
             }
         }
 
-        // Method public untuk refresh data dari luar (jika diperlukan)
+        // Method public untuk refresh data dari luar (dipanggil setelah CRUD)
         public void RefreshDashboard()
         {
             LoadDashboardData();

@@ -17,7 +17,7 @@ namespace SBN_Application.Models
         public string Tipe_Investor { get; set; }
         public int Min_Beli { get; set; }
         public double Fixed_Rate { get; set; }
-        public DateTime Created_At { get; set; }
+        public DateTime Created_At { get; set; } = DateTime.UtcNow;
     }
 
 }

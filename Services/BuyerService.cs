@@ -98,7 +98,6 @@ namespace SBN_Application.Services
             }
             return false;
         }
-
         // Check if buyer exists by email
         public async Task<bool> EmailExists(string email, int? excludeId = null)
         {
@@ -107,16 +106,6 @@ namespace SBN_Application.Services
                 return await _db.Buyers.AnyAsync(x => x.Email == email && x.Id_Buyer != excludeId);
             }
             return await _db.Buyers.AnyAsync(x => x.Email == email);
-        }
-
-        // Search buyers by name or email
-        public async Task<List<Buyer>> SearchBuyers(string searchTerm)
-        {
-            return await _db.Buyers
-                .AsNoTracking()
-                .Where(x => x.Nama_Buyer.Contains(searchTerm) || x.Email.Contains(searchTerm))
-                .OrderBy(x => x.Nama_Buyer)
-                .ToListAsync();
         }
     }
 }

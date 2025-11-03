@@ -62,6 +62,19 @@ namespace SBN_Application.Data
                     .HasColumnType("timestamp")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
             });
+
+            modelBuilder.Entity<SBN>(entity =>
+            {
+                entity.ToTable("SBN");
+                entity.HasKey(s => s.Id_Sbn);
+                entity.Property(s => s.Id_Sbn).ValueGeneratedOnAdd();
+                entity.Property(s => s.Nama_Sbn).IsRequired().HasMaxLength(100);
+                entity.Property(s => s.Kode_Sbn).IsRequired().HasMaxLength(50);
+                entity.Property(s => s.Deskripsi).HasMaxLength(500);
+                entity.Property(s => s.Tipe_Investor).HasMaxLength(50);
+                entity.Property(s => s.Created_At).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            });
+
         }
     }
 }

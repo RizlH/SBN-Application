@@ -245,6 +245,5 @@ namespace SBN_Application.Forms.Menus
                 }
             }
         }
-
     }
 }

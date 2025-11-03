@@ -132,6 +132,7 @@
             buttonAddSBN.TabIndex = 10;
             buttonAddSBN.Text = "Tambah";
             buttonAddSBN.UseVisualStyleBackColor = true;
+            buttonAddSBN.Click += buttonAddSBN_Click;
             // 
             // label6
             // 
@@ -157,6 +158,7 @@
             buttonDelSBN.TabIndex = 13;
             buttonDelSBN.Text = "Hapus";
             buttonDelSBN.UseVisualStyleBackColor = true;
+            buttonDelSBN.Click += buttonDelSBN_Click;
             // 
             // InputSBN
             // 
@@ -179,6 +181,7 @@
             Controls.Add(label1);
             Name = "InputSBN";
             Text = "Input Data SBN";
+            Load += InputSBN_Load;
             ResumeLayout(false);
             PerformLayout();
         }
