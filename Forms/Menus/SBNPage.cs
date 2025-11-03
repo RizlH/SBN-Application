@@ -35,6 +35,12 @@ namespace SBN_Application.Forms.Menus
         }
 
         // Konfigurasi DataGridView
+        // ===============================
+        // Konfigurasi DataGridView (mirip Asset Page)
+        // ===============================
+        // ===============================
+        // Konfigurasi DataGridView (versi final mirip Asset Page)
+        // ===============================
         private void ConfigureDataGridView()
         {
             dataGridViewsbn.AutoGenerateColumns = false;
@@ -44,10 +50,10 @@ namespace SBN_Application.Forms.Menus
             dataGridViewsbn.AllowUserToAddRows = false;
             dataGridViewsbn.RowHeadersVisible = false;
 
-            // Clear existing columns
+            // Bersihkan kolom lama
             dataGridViewsbn.Columns.Clear();
 
-            // Tambah kolom ID tapi HIDDEN
+            // Kolom ID (hidden)
             dataGridViewsbn.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Id_Sbn",
@@ -56,6 +62,7 @@ namespace SBN_Application.Forms.Menus
                 Visible = false
             });
 
+            // Nama SBN
             dataGridViewsbn.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Nama_Sbn",
@@ -64,6 +71,7 @@ namespace SBN_Application.Forms.Menus
                 Width = 230
             });
 
+            // Kode SBN
             dataGridViewsbn.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Kode_Sbn",
@@ -72,6 +80,7 @@ namespace SBN_Application.Forms.Menus
                 Width = 120
             });
 
+            // Deskripsi
             dataGridViewsbn.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Deskripsi",
@@ -80,40 +89,44 @@ namespace SBN_Application.Forms.Menus
                 Width = 300
             });
 
+            // Tipe Investor
             dataGridViewsbn.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Tipe_Investor",
                 HeaderText = "Tipe Investor",
                 Name = "Tipe_Investor",
-                Width = 250
+                Width = 200
             });
 
-            dataGridViewsbn.Columns.Add(new DataGridViewTextBoxColumn
+            // Min. Pembelian (Rp, rata kiri)
+            var minPembelianColumn = new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Min_Beli",
                 HeaderText = "Min. Pembelian",
                 Name = "Min_Beli",
-                Width = 120,
+                Width = 140,
                 DefaultCellStyle = new DataGridViewCellStyle
                 {
-                    Format = "N0",
-                    Alignment = DataGridViewContentAlignment.MiddleRight
+                    Alignment = DataGridViewContentAlignment.MiddleLeft // rata kiri
                 }
-            });
+            };
+            dataGridViewsbn.Columns.Add(minPembelianColumn);
 
-            dataGridViewsbn.Columns.Add(new DataGridViewTextBoxColumn
+            // Fixed Rate (6,30%)
+            var fixedRateColumn = new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Fixed_Rate",
-                HeaderText = "Fixed Rate (%)",
+                HeaderText = "Fixed Rate",
                 Name = "Fixed_Rate",
                 Width = 100,
                 DefaultCellStyle = new DataGridViewCellStyle
                 {
-                    Format = "N2",
-                    Alignment = DataGridViewContentAlignment.MiddleRight
+                    Alignment = DataGridViewContentAlignment.MiddleCenter
                 }
-            });
+            };
+            dataGridViewsbn.Columns.Add(fixedRateColumn);
 
+            // Tanggal dibuat
             dataGridViewsbn.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Created_At",
@@ -125,7 +138,40 @@ namespace SBN_Application.Forms.Menus
                     Format = "dd/MM/yyyy"
                 }
             });
+
+            // Tambahkan event formatting
+            dataGridViewsbn.CellFormatting += dataGridViewsbn_CellFormatting;
         }
+
+        // Event formatting khusus Min_Beli & Fixed_Rate
+        private void dataGridViewsbn_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            var culture = new System.Globalization.CultureInfo("id-ID");
+
+            // Format kolom Min_Beli jadi Rp X.XXX.XXX
+            if (dataGridViewsbn.Columns[e.ColumnIndex].Name == "Min_Beli" && e.Value != null)
+            {
+                if (decimal.TryParse(e.Value.ToString(), out decimal nominal))
+                {
+                    e.Value = $"Rp {nominal.ToString("N0", culture)}";
+                    e.FormattingApplied = true;
+                }
+            }
+
+            // Format kolom Fixed_Rate jadi X,XX%
+            if (dataGridViewsbn.Columns[e.ColumnIndex].Name == "Fixed_Rate" && e.Value != null)
+            {
+                if (decimal.TryParse(e.Value.ToString(), out decimal rate))
+                {
+                    if (rate < 1) rate *= 100; // kalau masih 0.063 → 6.30
+                    e.Value = $"{rate.ToString("N2", culture)}%";
+                    e.FormattingApplied = true;
+                }
+            }
+        }
+
+
+
 
         // Load data SBN ke DataGridView menggunakan SBNService
         private async Task LoadSBNDataAsync()

@@ -75,6 +75,7 @@
             // 
             // comboBoxBuyer
             // 
+            comboBoxBuyer.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxBuyer.FormattingEnabled = true;
             comboBoxBuyer.Location = new Point(142, 48);
             comboBoxBuyer.Margin = new Padding(4);
@@ -84,6 +85,7 @@
             // 
             // comboBoxSBN
             // 
+            comboBoxSBN.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxSBN.FormattingEnabled = true;
             comboBoxSBN.Location = new Point(142, 199);
             comboBoxSBN.Margin = new Padding(4);
@@ -98,6 +100,7 @@
             textBoxModal.Name = "textBoxModal";
             textBoxModal.Size = new Size(250, 31);
             textBoxModal.TabIndex = 5;
+            textBoxModal.KeyPress += textBoxModal_KeyPress;
             // 
             // buttonAddAsset
             // 
@@ -111,26 +114,30 @@
             // 
             // textBoxDetailBuyer
             // 
-            textBoxDetailBuyer.Location = new Point(446, 79);
+            textBoxDetailBuyer.BackColor = SystemColors.Window;
+            textBoxDetailBuyer.Location = new Point(411, 48);
             textBoxDetailBuyer.Margin = new Padding(4);
             textBoxDetailBuyer.Multiline = true;
             textBoxDetailBuyer.Name = "textBoxDetailBuyer";
-            textBoxDetailBuyer.Size = new Size(349, 99);
+            textBoxDetailBuyer.ReadOnly = true;
+            textBoxDetailBuyer.Size = new Size(384, 135);
             textBoxDetailBuyer.TabIndex = 7;
             // 
             // textBoxDetailSBN
             // 
-            textBoxDetailSBN.Location = new Point(446, 231);
+            textBoxDetailSBN.BackColor = SystemColors.Window;
+            textBoxDetailSBN.Location = new Point(411, 202);
             textBoxDetailSBN.Margin = new Padding(4);
             textBoxDetailSBN.Multiline = true;
             textBoxDetailSBN.Name = "textBoxDetailSBN";
-            textBoxDetailSBN.Size = new Size(349, 99);
+            textBoxDetailSBN.ReadOnly = true;
+            textBoxDetailSBN.Size = new Size(384, 128);
             textBoxDetailSBN.TabIndex = 8;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(446, 51);
+            label4.Location = new Point(282, 85);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(110, 25);
@@ -140,7 +147,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(446, 202);
+            label5.Location = new Point(293, 236);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Size = new Size(99, 25);
@@ -159,6 +166,7 @@
             // 
             // comboBoxTenor
             // 
+            comboBoxTenor.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxTenor.FormattingEnabled = true;
             comboBoxTenor.Items.AddRange(new object[] { "1 Tahun", "2 Tahun", "3 Tahun", "4 Tahun", "5 Tahun", "6 Tahun" });
             comboBoxTenor.Location = new Point(142, 401);
@@ -187,6 +195,7 @@
             Controls.Add(label1);
             Margin = new Padding(4);
             Name = "InputAsset";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Input Data Asset";
             ResumeLayout(false);
             PerformLayout();

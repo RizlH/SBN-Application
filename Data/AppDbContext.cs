@@ -63,6 +63,7 @@ namespace SBN_Application.Data
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
             });
 
+            // Konfigurasi untuk SBN
             modelBuilder.Entity<SBN>(entity =>
             {
                 entity.ToTable("SBN");
@@ -75,6 +76,40 @@ namespace SBN_Application.Data
                 entity.Property(s => s.Created_At).HasDefaultValueSql("CURRENT_TIMESTAMP");
             });
 
+            // Konfigurasi untuk Asset
+            modelBuilder.Entity<Asset>(entity =>
+            {
+                entity.ToTable("Assets");
+                entity.HasKey(a => a.Id_Asset);
+
+                entity.Property(a => a.Id_Asset)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(a => a.Modal)
+                    .IsRequired();
+
+                entity.Property(a => a.Tenor)
+                    .IsRequired();
+
+                entity.Property(a => a.Total_Diterima)
+                    .HasColumnType("double precision");
+
+                entity.Property(a => a.Created_At)
+                    .HasColumnType("timestamp")
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                // Konfigurasi relasi dengan Buyer
+                entity.HasOne(a => a.Buyer)
+                    .WithMany()
+                    .HasForeignKey(a => a.Id_Buyer)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                // Konfigurasi relasi dengan SBN
+                entity.HasOne(a => a.Sbn)
+                    .WithMany()
+                    .HasForeignKey(a => a.Id_Sbn)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
         }
     }
 }

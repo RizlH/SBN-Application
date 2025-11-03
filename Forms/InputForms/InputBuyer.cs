@@ -40,6 +40,12 @@ namespace SBN_Application.Forms.InputForms
 
         private async void InputBuyer_Load(object sender, EventArgs e)
         {
+            textBoxNamaBuyer.PlaceholderText = "John Doe?";
+            textBoxNoTelp.PlaceholderText = "08xxxxxxxxxx";
+            textBoxEmailBuyer.PlaceholderText = "john@gmail.com";
+            textBoxAlamatBuyer.PlaceholderText = "Kota Tangerang";
+            textBoxNoRek.PlaceholderText = "112233441122";
+
             if (_isEditMode && _buyerId.HasValue)
             {
                 this.Text = "Edit Buyer";

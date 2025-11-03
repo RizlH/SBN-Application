@@ -40,6 +40,11 @@ namespace SBN_Application.Forms.InputForms
 
         private async void InputSBN_Load(object sender, EventArgs e)
         {
+            textBoxNamaSBN.PlaceholderText = "Surat Utang Konoha?";
+            textBoxKodeSBN.PlaceholderText = "SUK000?";
+            textBoxDesSBN.PlaceholderText = "Sukuk seri ke-?";
+            textBoxMinSBN.PlaceholderText = "1000000?";
+            textBoxFixSBN.PlaceholderText = "6,5?";
             if (_isEditMode && _sbnId.HasValue)
             {
                 this.Text = "Edit SBN";
@@ -248,7 +253,7 @@ namespace SBN_Application.Forms.InputForms
             textBoxNamaSBN.Clear();
             textBoxKodeSBN.Clear();
             textBoxDesSBN.Clear();
-            comboBoxTipeSBN.Items.Clear();
+            comboBoxTipeSBN.SelectedIndex = -1;
             textBoxMinSBN.Clear();
             textBoxFixSBN.Clear();
             textBoxNamaSBN.Focus();

@@ -27,14 +27,20 @@ namespace SBN_Application.Models
         // Method bantu untuk menghitung Total_Diterima
         public void HitungTotalDiterima()
         {
-            if (Sbn != null)
-            {
-                Total_Diterima = Modal + (Modal * Sbn.Fixed_Rate * (Tenor / 12.0));
-            }
-            else
-            {
-                Total_Diterima = 0;
-            }
+            if (Sbn == null)
+                return;
+
+            // konversi tenor ke tahun
+            double tahun = Tenor / 12.0;
+
+            // ubah fixed rate dari persen ke desimal
+            double fixedRate = Sbn.Fixed_Rate / 100.0;
+
+            // hitung bunga tahunan
+            double totalBunga = Modal * fixedRate * tahun;
+
+            Total_Diterima = Modal + totalBunga;
         }
+
     }
-}
+}   
