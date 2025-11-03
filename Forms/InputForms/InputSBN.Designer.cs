@@ -35,13 +35,13 @@
             textBoxKodeSBN = new TextBox();
             textBoxDesSBN = new TextBox();
             label4 = new Label();
-            textBoxTipeSBN = new TextBox();
             label5 = new Label();
             textBoxMinSBN = new TextBox();
             buttonAddSBN = new Button();
             label6 = new Label();
             textBoxFixSBN = new TextBox();
             buttonDelSBN = new Button();
+            comboBoxTipeSBN = new ComboBox();
             SuspendLayout();
             // 
             // label1
@@ -101,13 +101,6 @@
             label4.TabIndex = 6;
             label4.Text = "Deskripsi";
             // 
-            // textBoxTipeSBN
-            // 
-            textBoxTipeSBN.Location = new Point(269, 248);
-            textBoxTipeSBN.Name = "textBoxTipeSBN";
-            textBoxTipeSBN.Size = new Size(232, 31);
-            textBoxTipeSBN.TabIndex = 7;
-            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -160,18 +153,27 @@
             buttonDelSBN.UseVisualStyleBackColor = true;
             buttonDelSBN.Click += buttonDelSBN_Click;
             // 
+            // comboBoxTipeSBN
+            // 
+            comboBoxTipeSBN.FormattingEnabled = true;
+            comboBoxTipeSBN.Items.AddRange(new object[] { "Investor Ritel (Individu)", "Investor Institusional", "Investor Asing (Non-Resident)" });
+            comboBoxTipeSBN.Location = new Point(269, 251);
+            comboBoxTipeSBN.Name = "comboBoxTipeSBN";
+            comboBoxTipeSBN.Size = new Size(232, 33);
+            comboBoxTipeSBN.TabIndex = 14;
+            // 
             // InputSBN
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(578, 514);
+            Controls.Add(comboBoxTipeSBN);
             Controls.Add(buttonDelSBN);
             Controls.Add(textBoxFixSBN);
             Controls.Add(label6);
             Controls.Add(buttonAddSBN);
             Controls.Add(textBoxMinSBN);
             Controls.Add(label5);
-            Controls.Add(textBoxTipeSBN);
             Controls.Add(label4);
             Controls.Add(textBoxDesSBN);
             Controls.Add(textBoxKodeSBN);
@@ -195,12 +197,12 @@
         private TextBox textBoxKodeSBN;
         private TextBox textBoxDesSBN;
         private Label label4;
-        private TextBox textBoxTipeSBN;
         private Label label5;
         private TextBox textBoxMinSBN;
         private Button buttonAddSBN;
         private Label label6;
         private TextBox textBoxFixSBN;
         private Button buttonDelSBN;
+        private ComboBox comboBoxTipeSBN;
     }
 }

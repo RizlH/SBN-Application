@@ -62,7 +62,7 @@ namespace SBN_Application.Forms.Menus
                 DataPropertyName = "Nama_Sbn",
                 HeaderText = "Nama SBN",
                 Name = "Nama_Sbn",
-                Width = 180
+                Width = 230
             });
 
             dataGridViewsbn.Columns.Add(new DataGridViewTextBoxColumn
@@ -78,7 +78,7 @@ namespace SBN_Application.Forms.Menus
                 DataPropertyName = "Deskripsi",
                 HeaderText = "Deskripsi",
                 Name = "Deskripsi",
-                Width = 150
+                Width = 300
             });
 
             dataGridViewsbn.Columns.Add(new DataGridViewTextBoxColumn
@@ -86,7 +86,7 @@ namespace SBN_Application.Forms.Menus
                 DataPropertyName = "Tipe_Investor",
                 HeaderText = "Tipe Investor",
                 Name = "Tipe_Investor",
-                Width = 120
+                Width = 250
             });
 
             dataGridViewsbn.Columns.Add(new DataGridViewTextBoxColumn

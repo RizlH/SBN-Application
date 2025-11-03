@@ -63,7 +63,7 @@ namespace SBN_Application.Forms.InputForms
                     textBoxNamaSBN.Text = sbn.Nama_Sbn;
                     textBoxKodeSBN.Text = sbn.Kode_Sbn;
                     textBoxDesSBN.Text = sbn.Deskripsi;
-                    textBoxTipeSBN.Text = sbn.Tipe_Investor;
+                    comboBoxTipeSBN.Text = sbn.Tipe_Investor;
                     textBoxMinSBN.Text = sbn.Min_Beli.ToString();
                     textBoxFixSBN.Text = sbn.Fixed_Rate.ToString("F2");
                 }
@@ -131,7 +131,7 @@ namespace SBN_Application.Forms.InputForms
                     Nama_Sbn = textBoxNamaSBN.Text.Trim(),
                     Kode_Sbn = textBoxKodeSBN.Text.Trim(),
                     Deskripsi = textBoxDesSBN.Text.Trim(),
-                    Tipe_Investor = textBoxTipeSBN.Text.Trim(),
+                    Tipe_Investor = comboBoxTipeSBN.Text.Trim(),
                     Min_Beli = int.Parse(textBoxMinSBN.Text.Trim()),
                     Fixed_Rate = double.Parse(textBoxFixSBN.Text.Trim()),
                     Created_At = DateTime.UtcNow
@@ -174,7 +174,7 @@ namespace SBN_Application.Forms.InputForms
                     sbn.Nama_Sbn = textBoxNamaSBN.Text.Trim();
                     sbn.Kode_Sbn = textBoxKodeSBN.Text.Trim();
                     sbn.Deskripsi = textBoxDesSBN.Text.Trim();
-                    sbn.Tipe_Investor = textBoxTipeSBN.Text.Trim();
+                    sbn.Tipe_Investor = comboBoxTipeSBN.Text.Trim();
                     sbn.Min_Beli = int.Parse(textBoxMinSBN.Text.Trim());
                     sbn.Fixed_Rate = double.Parse(textBoxFixSBN.Text.Trim());
 
@@ -213,11 +213,11 @@ namespace SBN_Application.Forms.InputForms
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(textBoxTipeSBN.Text))
+            if (string.IsNullOrWhiteSpace(comboBoxTipeSBN.Text))
             {
                 MessageBox.Show("Tipe Investor harus diisi!", "Validasi",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                textBoxTipeSBN.Focus();
+                comboBoxTipeSBN.Focus();
                 return false;
             }
 
@@ -248,7 +248,7 @@ namespace SBN_Application.Forms.InputForms
             textBoxNamaSBN.Clear();
             textBoxKodeSBN.Clear();
             textBoxDesSBN.Clear();
-            textBoxTipeSBN.Clear();
+            comboBoxTipeSBN.Items.Clear();
             textBoxMinSBN.Clear();
             textBoxFixSBN.Clear();
             textBoxNamaSBN.Focus();
