@@ -214,6 +214,26 @@ namespace SBN_Application.Forms.InputForms
                 return false;
             }
 
+            // Validasi hanya angka
+            if (!textBoxNoTelp.Text.All(char.IsDigit))
+            {
+                MessageBox.Show("No. Telp hanya boleh berisi angka!", "Validasi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBoxNoTelp.Focus();
+                return false;
+            }
+
+            // Validasi panjang nomor (minimal 8 digit, maksimal 14 digit)
+            if (textBoxNoTelp.Text.Length <= 7 || textBoxNoTelp.Text.Length >= 15)
+            {
+                MessageBox.Show("No. Telp harus terdiri dari 8 hingga 14 digit!", "Validasi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBoxNoTelp.Focus();
+                return false;
+            }
+
+
+
             if (string.IsNullOrWhiteSpace(textBoxEmailBuyer.Text))
             {
                 MessageBox.Show("Email harus diisi!", "Validasi",
@@ -246,6 +266,25 @@ namespace SBN_Application.Forms.InputForms
                 textBoxNoRek.Focus();
                 return false;
             }
+
+            // Validasi hanya angka
+            if (!textBoxNoRek.Text.All(char.IsDigit))
+            {
+                MessageBox.Show("No. Rekening hanya boleh berisi angka!", "Validasi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBoxNoRek.Focus();
+                return false;
+            }
+
+            // Validasi panjang (opsional, contoh 10–16 digit)
+            if (textBoxNoRek.Text.Length < 10 || textBoxNoRek.Text.Length > 16)
+            {
+                MessageBox.Show("No. Rekening harus terdiri dari 10 hingga 16 digit!", "Validasi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBoxNoRek.Focus();
+                return false;
+            }
+
 
             return true;
         }
