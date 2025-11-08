@@ -23,7 +23,7 @@ namespace SBN_Application.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // Connection string - Ganti sesuai dengan konfigurasi database Anda
+                // Connection string
                 optionsBuilder.UseNpgsql("Host=localhost;Database=db_vb2_sbn;Username=postgres;Password=rizal0857");
             }
         }
@@ -38,7 +38,7 @@ namespace SBN_Application.Data
             // Konfigurasi tambahan untuk Buyer
             modelBuilder.Entity<Buyer>(entity =>
             {
-                entity.ToTable("Buyers"); // Pastikan nama tabel sesuai
+                entity.ToTable("Buyers"); 
 
                 entity.Property(b => b.Id_Buyer)
                     .ValueGeneratedOnAdd(); // Auto-increment
