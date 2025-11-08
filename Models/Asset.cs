@@ -8,13 +8,10 @@ namespace SBN_Application.Models
     {
         [Key]
         public int Id_Asset { get; set; }
-
         [ForeignKey("Buyer")]
         public int Id_Buyer { get; set; }
-
         [ForeignKey("Sbn")]
         public int Id_Sbn { get; set; }
-
         public int Modal { get; set; }
         public int Tenor { get; set; } // dalam bulan
         public double Total_Diterima { get; set; }

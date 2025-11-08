@@ -155,13 +155,13 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Verdana", 30F, FontStyle.Bold | FontStyle.Italic);
+            label1.Font = new Font("Verdana", 30F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Black;
             label1.Location = new Point(50, 49);
             label1.Name = "label1";
-            label1.Size = new Size(329, 73);
+            label1.Size = new Size(424, 73);
             label1.TabIndex = 23;
-            label1.Text = "Preview:";
+            label1.Text = "DashBoard:";
             // 
             // Dashboard
             // 
