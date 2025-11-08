@@ -206,6 +206,8 @@ namespace SBN_Application.Forms.InputForms
                 return false;
             }
 
+
+
             if (string.IsNullOrWhiteSpace(textBoxNoTelp.Text))
             {
                 MessageBox.Show("No. Telp harus diisi!", "Validasi",
@@ -215,7 +217,7 @@ namespace SBN_Application.Forms.InputForms
             }
 
             // Validasi hanya angka
-            if (!textBoxNoTelp.Text.All(char.IsDigit))
+            if (!textBoxNoTelp.Text.All(char.IsDigit) || textBoxNoTelp.Text.Contains("+"))
             {
                 MessageBox.Show("No. Telp hanya boleh berisi angka!", "Validasi",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
